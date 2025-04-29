@@ -1,8 +1,8 @@
-import type { Metadata } from "next"
-import { notFound } from "next/navigation"
-import Image from "next/image"
-import Link from "next/link"
-import { ArrowLeft, Calendar, Clock, User, ChevronRight } from "lucide-react"
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowLeft, Calendar, Clock, User, ChevronRight } from "lucide-react";
 
 // This would typically come from a database or CMS
 const blogPosts = {
@@ -31,7 +31,13 @@ const blogPosts = {
     readTime: "6 min read",
     imageSrc: "/blog/web-dev-trends.png",
     slug: "future-web-development-trends-2025",
-    keywords: ["web development", "WebAssembly", "AI development", "edge computing", "future trends"],
+    keywords: [
+      "web development",
+      "WebAssembly",
+      "AI development",
+      "edge computing",
+      "future trends",
+    ],
     datePublished: "2025-04-15T10:00:00Z",
     dateModified: "2025-04-15T10:00:00Z",
   },
@@ -68,7 +74,13 @@ const blogPosts = {
     readTime: "5 min read",
     imageSrc: "/blog/odoo-erp.png",
     slug: "odoo-erp-transform-business-operations",
-    keywords: ["Odoo ERP", "business operations", "process automation", "business efficiency", "ERP implementation"],
+    keywords: [
+      "Odoo ERP",
+      "business operations",
+      "process automation",
+      "business efficiency",
+      "ERP implementation",
+    ],
     datePublished: "2025-04-08T10:00:00Z",
     dateModified: "2025-04-08T10:00:00Z",
   },
@@ -124,7 +136,13 @@ const blogPosts = {
     readTime: "8 min read",
     imageSrc: "/blog/mobile-app-dev.png",
     slug: "native-vs-cross-platform-mobile-development",
-    keywords: ["mobile app development", "native apps", "cross-platform development", "React Native", "Flutter"],
+    keywords: [
+      "mobile app development",
+      "native apps",
+      "cross-platform development",
+      "React Native",
+      "Flutter",
+    ],
     datePublished: "2025-03-28T10:00:00Z",
     dateModified: "2025-03-28T10:00:00Z",
   },
@@ -157,19 +175,29 @@ const blogPosts = {
     readTime: "10 min read",
     imageSrc: "/blog/seo-importance.png",
     slug: "seo-importance-digital-marketing",
-    keywords: ["SEO", "digital marketing", "search engine optimization", "online visibility", "organic traffic"],
+    keywords: [
+      "SEO",
+      "digital marketing",
+      "search engine optimization",
+      "online visibility",
+      "organic traffic",
+    ],
     datePublished: "2025-04-25T10:00:00Z",
     dateModified: "2025-04-25T10:00:00Z",
   },
-}
+};
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const post = blogPosts[params.slug as keyof typeof blogPosts]
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const post = blogPosts[params.slug as keyof typeof blogPosts];
 
   if (!post) {
     return {
       title: "Post Not Found",
-    }
+    };
   }
 
   return {
@@ -202,15 +230,19 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       description: post.excerpt,
       images: [`https://insertech.io${post.imageSrc}`],
     },
-  }
+  };
+}
+
+export function generateStaticParams() {
+  return Object.keys(blogPosts).map((slug) => ({ slug }));
 }
 
 export default function BlogPostPage({ params }: { params: { slug: string } }) {
-  const slug = params.slug
-  const post = blogPosts[slug as keyof typeof blogPosts]
+  const slug = params.slug;
+  const post = blogPosts[slug as keyof typeof blogPosts];
 
   if (!post) {
-    notFound()
+    notFound();
   }
 
   return (
@@ -219,14 +251,20 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
       <nav className="flex mb-6" aria-label="Breadcrumb">
         <ol className="inline-flex items-center space-x-1 md:space-x-3">
           <li className="inline-flex items-center">
-            <Link href="/" className="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600">
+            <Link
+              href="/"
+              className="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600"
+            >
               Home
             </Link>
           </li>
           <li>
             <div className="flex items-center">
               <ChevronRight className="w-4 h-4 text-gray-400" />
-              <Link href="/blog" className="ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2">
+              <Link
+                href="/blog"
+                className="ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2"
+              >
                 Blog
               </Link>
             </div>
@@ -234,7 +272,9 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
           <li aria-current="page">
             <div className="flex items-center">
               <ChevronRight className="w-4 h-4 text-gray-400" />
-              <span className="ml-1 text-sm font-medium text-blue-600 md:ml-2">{post.title}</span>
+              <span className="ml-1 text-sm font-medium text-blue-600 md:ml-2">
+                {post.title}
+              </span>
             </div>
           </li>
         </ol>
@@ -247,7 +287,9 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
 
       <div className="mb-8">
         <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
-          <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">{post.category}</span>
+          <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">
+            {post.category}
+          </span>
           <div className="flex items-center gap-1">
             <Calendar className="h-4 w-4" />
             <span>{post.date}</span>
@@ -261,7 +303,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
         <h1 className="text-3xl md:text-4xl font-bold mb-6">{post.title}</h1>
 
         <div className="flex items-center gap-3 mb-8">
-          {post.author.avatar ? (
+          {"avatar" in post.author && post.author.avatar ? (
             <Image
               src={post.author.avatar || "/placeholder.svg"}
               alt={`${post.author.name} - Insertech blog author`}
@@ -288,7 +330,10 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
         />
       </div>
 
-      <div className="prose prose-lg max-w-none" dangerouslySetInnerHTML={{ __html: post.content }} />
+      <div
+        className="prose prose-lg max-w-none"
+        dangerouslySetInnerHTML={{ __html: post.content }}
+      />
 
       {/* BlogPosting Schema */}
       <script
@@ -354,5 +399,5 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
         }}
       />
     </div>
-  )
+  );
 }
