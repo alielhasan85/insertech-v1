@@ -1,14 +1,16 @@
-import type { Metadata } from "next"
-import BlogSection from "@/components/sections/blog-section"
+import type { Metadata } from "next";
+import BlogSection from "@/components/sections/blog-section";
 
 export const metadata: Metadata = {
   title: "Blog",
-  description: "Stay updated with our latest articles, news, and industry insights",
+  description:
+    "Stay updated with our latest articles, news, and industry insights",
   openGraph: {
     title: "Blog | Insertech - Software Engineering & Digital Media Agency",
-    description: "Read our latest articles on web development, mobile apps, digital trends, and more",
+    description:
+      "Read our latest articles on web development, mobile apps, digital trends, and more",
   },
-}
+};
 
 export default function BlogPage() {
   // Update the blogPosts array to include our new SEO post at the beginning
@@ -73,7 +75,7 @@ export default function BlogPage() {
       slug: "native-vs-cross-platform-mobile-development",
     },
     // Add more blog posts for the full blog page
-  ]
+  ];
 
   return (
     <div className="py-12">
@@ -84,5 +86,5 @@ export default function BlogPage() {
         viewAllLink={false}
       />
     </div>
-  )
+  );
 }

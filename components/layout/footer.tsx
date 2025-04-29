@@ -1,58 +1,73 @@
-"use client"
+"use client";
 
-import { useRouter, usePathname } from "next/navigation"
-import { Facebook, Twitter, Linkedin, Instagram, Mail, MapPin, Phone, ChevronUp } from "lucide-react"
-import { useState, useEffect } from "react"
+import { useRouter, usePathname } from "next/navigation";
+import {
+  Facebook,
+  Twitter,
+  Linkedin,
+  Instagram,
+  Mail,
+  MapPin,
+  Phone,
+  ChevronUp,
+} from "lucide-react";
+import { useState, useEffect } from "react";
 
 interface FooterProps {
-  contactEmail?: string
-  contactAddress?: string
-  contactPhone?: string
-  forceCompact?: boolean
+  contactEmail?: string;
+  contactAddress?: string;
+  contactPhone?: string;
+  forceCompact?: boolean;
 }
 
 export default function Footer({
   contactEmail = "info@insertech.com",
-  contactAddress = "123 Tech Hub, Silicon Valley, CA 94025",
-  contactPhone = "+1 (555) 123-4567",
+
   forceCompact,
 }: FooterProps) {
-  const router = useRouter()
-  const pathname = usePathname()
-  const currentYear = new Date().getFullYear()
-  const [isExpanded, setIsExpanded] = useState(false)
+  const router = useRouter();
+  const pathname = usePathname();
+  const currentYear = new Date().getFullYear();
+  const [isExpanded, setIsExpanded] = useState(false);
 
   // Determine if we should show the compact footer based on the current page
   // Pages like blog posts, service details, etc. should have compact footers
-  const shouldUseCompactFooter = () => {
-    if (forceCompact !== undefined) return forceCompact
+  // const shouldUseCompactFooter = () => {
+  //   if (forceCompact !== undefined) return forceCompact;
 
-    // Pages that should have the full footer
-    const fullFooterPages = ["/", "/contact", "/about"]
+  //   // Pages that should have the full footer
+  //   const fullFooterPages = ["/", "/contact", "/about"];
 
-    // Use compact footer for deeper pages (blog posts, service details, etc.)
-    const isDeepPage = pathname.split("/").length > 2
+  //   // Use compact footer for deeper pages (blog posts, service details, etc.)
+  //   const isDeepPage = pathname.split("/").length > 2;
 
-    return !fullFooterPages.includes(pathname) || isDeepPage
-  }
+  //   return !fullFooterPages.includes(pathname) || isDeepPage;
+  // };
 
-  const [isCompact, setIsCompact] = useState(true) // Default to compact until we can check
+  const [isCompact, setIsCompact] = useState(true); // Default to compact until we can check
 
   useEffect(() => {
-    setIsCompact(shouldUseCompactFooter())
-  }, [pathname])
+    const forceCompactFooter = (() => {
+      if (forceCompact !== undefined) return forceCompact;
 
+      const fullFooterPages = ["/", "/contact", "/about"];
+      const isDeepPage = pathname.split("/").length > 2;
+      return !fullFooterPages.includes(pathname) || isDeepPage;
+    })();
+
+    setIsCompact(forceCompactFooter);
+  }, [pathname, forceCompact]);
   // Function to handle navigation with scroll to top
   const handleNavigation = (path: string) => {
     // Navigate to the path
-    router.push(path)
+    router.push(path);
 
     // Scroll to the top of the page with smooth animation
     window.scrollTo({
       top: 0,
       behavior: "smooth",
-    })
-  }
+    });
+  };
 
   return (
     <footer className="bg-[#0a0e29] text-white relative overflow-hidden">
@@ -129,7 +144,9 @@ export default function Footer({
           </div>
 
           <div className="mt-6 pt-4 border-t border-blue-900/50 flex flex-col items-center">
-            <p className="text-center text-gray-400 text-sm">© {currentYear} Insertech. All rights reserved.</p>
+            <p className="text-center text-gray-400 text-sm">
+              © {currentYear} Insertech. All rights reserved.
+            </p>
           </div>
         </div>
       ) : (
@@ -150,14 +167,19 @@ export default function Footer({
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12">
             {/* Company Info */}
             <div>
-              <h2 className="text-3xl font-bold mb-6">Let's build tomorrow, today.</h2>
+              <h2 className="text-3xl font-bold mb-6">
+                Let&apos;s build tomorrow, today.
+              </h2>
               <div className="space-y-6">
                 <div>
                   <h3 className="text-xl font-semibold mb-4">Contact Info</h3>
                   <ul className="space-y-2 sm:space-y-3">
                     <li className="flex items-start">
                       <Mail className="w-5 h-5 mr-3 mt-0.5 text-blue-400" />
-                      <a href={`mailto:${contactEmail}`} className="hover:text-blue-400 transition-colors">
+                      <a
+                        href={`mailto:${contactEmail}`}
+                        className="hover:text-blue-400 transition-colors"
+                      >
                         {contactEmail}
                       </a>
                     </li>
@@ -170,7 +192,10 @@ export default function Footer({
                     </li>
                     <li className="flex items-start">
                       <Phone className="w-5 h-5 mr-3 mt-0.5 text-blue-400" />
-                      <a href="tel:+97474716942" className="hover:text-blue-400 transition-colors">
+                      <a
+                        href="tel:+97474716942"
+                        className="hover:text-blue-400 transition-colors"
+                      >
                         +974 7471 6942
                       </a>
                     </li>
@@ -178,12 +203,17 @@ export default function Footer({
                       <MapPin className="w-5 h-5 mr-3 mt-0.5 text-blue-400" />
                       <div className="flex flex-col">
                         <span className="font-medium">Lebanon Office:</span>
-                        <span>Beirut, Ghobeiry Center, 7th floor, Mesharafiye</span>
+                        <span>
+                          Beirut, Ghobeiry Center, 7th floor, Mesharafiye
+                        </span>
                       </div>
                     </li>
                     <li className="flex items-start">
                       <Phone className="w-5 h-5 mr-3 mt-0.5 text-blue-400" />
-                      <a href="tel:+9613513968" className="hover:text-blue-400 transition-colors">
+                      <a
+                        href="tel:+9613513968"
+                        className="hover:text-blue-400 transition-colors"
+                      >
                         +961 3 513 968
                       </a>
                     </li>
@@ -198,7 +228,9 @@ export default function Footer({
               <ul className="space-y-3">
                 <li>
                   <button
-                    onClick={() => handleNavigation("/services/web-development")}
+                    onClick={() =>
+                      handleNavigation("/services/web-development")
+                    }
                     className="hover:text-blue-400 transition-colors text-left"
                   >
                     Web Design & Development
@@ -206,7 +238,9 @@ export default function Footer({
                 </li>
                 <li>
                   <button
-                    onClick={() => handleNavigation("/services/mobile-development")}
+                    onClick={() =>
+                      handleNavigation("/services/mobile-development")
+                    }
                     className="hover:text-blue-400 transition-colors text-left"
                   >
                     Mobile App Development
@@ -214,7 +248,9 @@ export default function Footer({
                 </li>
                 <li>
                   <button
-                    onClick={() => handleNavigation("/services/custom-software")}
+                    onClick={() =>
+                      handleNavigation("/services/custom-software")
+                    }
                     className="hover:text-blue-400 transition-colors text-left"
                   >
                     Custom Software & AI
@@ -230,7 +266,9 @@ export default function Footer({
                 </li>
                 <li>
                   <button
-                    onClick={() => handleNavigation("/services/digital-marketing")}
+                    onClick={() =>
+                      handleNavigation("/services/digital-marketing")
+                    }
                     className="hover:text-blue-400 transition-colors text-left"
                   >
                     Digital Media & SEO
@@ -306,9 +344,11 @@ export default function Footer({
             <div>
               <h3 className="text-xl font-semibold mb-4">Insertech</h3>
               <p className="text-gray-300 mb-6">
-                Insertech is a leading software engineering and digital media agency specializing in web development,
-                mobile apps, ERP solutions, and Odoo integration. We've proudly served clients worldwide for over a
-                decade, delivering reliable IT and digital services of the highest quality.
+                Insertech is a leading software engineering and digital media
+                agency specializing in web development, mobile apps, ERP
+                solutions, and Odoo integration. We&apos;ve proudly served
+                clients worldwide for over a decade, delivering reliable IT and
+                digital services of the highest quality.
               </p>
               <div className="flex flex-wrap gap-3 sm:space-x-4 mb-6">
                 <a
@@ -353,10 +393,12 @@ export default function Footer({
 
           {/* Copyright */}
           <div className="mt-16 pt-8 border-t border-blue-900/50 flex flex-col items-center">
-            <p className="text-center text-gray-400">© {currentYear} Insertech. All rights reserved.</p>
+            <p className="text-center text-gray-400">
+              © {currentYear} Insertech. All rights reserved.
+            </p>
           </div>
         </div>
       )}
     </footer>
-  )
+  );
 }

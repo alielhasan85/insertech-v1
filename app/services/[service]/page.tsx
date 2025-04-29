@@ -1,10 +1,17 @@
-import type { Metadata } from "next"
-import { notFound } from "next/navigation"
-import Image from "next/image"
-import Link from "next/link"
-import { ArrowLeft, Globe, Smartphone, Code, Database, BarChart3, ShoppingBag, Video, ChevronRight } from "lucide-react"
-import { CheckCircle } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import Image from "next/image";
+import Link from "next/link";
+import { Suspense } from "react";
+import { ChevronRight } from "lucide-react";
+import { CheckCircle } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import ServicePageClient from "./ServicePageClient";
+
+// Define the Params type for this dynamic route
+type Params = {
+  service: string;
+};
 
 // This would typically come from a database or API
 const services = {
@@ -21,7 +28,16 @@ const services = {
       "Robust, scalable backend systems that power your digital products",
       "Lightning-fast loading times and smooth interactions for optimal user experience",
     ],
-    technologies: ["React", "Next.js", "TypeScript", "Node.js", "Tailwind CSS", "GraphQL", "PostgreSQL", "MongoDB"],
+    technologies: [
+      "React",
+      "Next.js",
+      "TypeScript",
+      "Node.js",
+      "Tailwind CSS",
+      "GraphQL",
+      "PostgreSQL",
+      "MongoDB",
+    ],
     faqs: [
       {
         question: "How long does it take to develop a website?",
@@ -53,10 +69,19 @@ const services = {
       "Intuitive interfaces that follow platform-specific design guidelines",
       "Rigorous testing across devices to ensure flawless performance",
     ],
-    technologies: ["React Native", "Flutter", "Swift", "Kotlin", "Firebase", "Redux", "MobX"],
+    technologies: [
+      "React Native",
+      "Flutter",
+      "Swift",
+      "Kotlin",
+      "Firebase",
+      "Redux",
+      "MobX",
+    ],
     faqs: [
       {
-        question: "What's the difference between native and cross-platform apps?",
+        question:
+          "What's the difference between native and cross-platform apps?",
         answer:
           "Native apps are built specifically for one platform (iOS or Android) using platform-specific languages. Cross-platform apps use frameworks like React Native or Flutter to share code across platforms, reducing development time and cost.",
       },
@@ -85,7 +110,15 @@ const services = {
       "Data analytics and visualization tools for better decision-making",
       "Scalable architecture that grows with your business",
     ],
-    technologies: ["Python", "TensorFlow", "PyTorch", "OpenAI", "AWS", "Google Cloud", "Azure"],
+    technologies: [
+      "Python",
+      "TensorFlow",
+      "PyTorch",
+      "OpenAI",
+      "AWS",
+      "Google Cloud",
+      "Azure",
+    ],
     faqs: [
       {
         question: "How do you approach custom software development?",
@@ -117,7 +150,15 @@ const services = {
       "Integration with existing systems and data migration",
       "Comprehensive training and ongoing support",
     ],
-    technologies: ["Odoo", "Python", "PostgreSQL", "XML", "JavaScript", "QWeb", "REST API"],
+    technologies: [
+      "Odoo",
+      "Python",
+      "PostgreSQL",
+      "XML",
+      "JavaScript",
+      "QWeb",
+      "REST API",
+    ],
     faqs: [
       {
         question: "What is Odoo and why should I choose it for my business?",
@@ -149,7 +190,15 @@ const services = {
       "Social media management and paid advertising campaigns",
       "Analytics and reporting to measure performance and ROI",
     ],
-    technologies: ["Google Analytics", "SEMrush", "Ahrefs", "Google Ads", "Meta Ads", "Mailchimp", "HubSpot"],
+    technologies: [
+      "Google Analytics",
+      "SEMrush",
+      "Ahrefs",
+      "Google Ads",
+      "Meta Ads",
+      "Mailchimp",
+      "HubSpot",
+    ],
     faqs: [
       {
         question: "How long does it take to see results from SEO?",
@@ -162,7 +211,8 @@ const services = {
           "Yes, we provide comprehensive social media management services, including content creation, posting schedules, community engagement, and performance analytics.",
       },
       {
-        question: "How do you measure the success of digital marketing campaigns?",
+        question:
+          "How do you measure the success of digital marketing campaigns?",
         answer:
           "We track key performance indicators (KPIs) such as website traffic, conversion rates, engagement metrics, and return on investment (ROI) to measure campaign success and make data-driven optimizations.",
       },
@@ -181,7 +231,15 @@ const services = {
       "App integration and custom functionality development",
       "Payment gateway and shipping integration",
     ],
-    technologies: ["Shopify", "Liquid", "JavaScript", "React", "Shopify API", "Shopify Plus", "Shopify Apps"],
+    technologies: [
+      "Shopify",
+      "Liquid",
+      "JavaScript",
+      "React",
+      "Shopify API",
+      "Shopify Plus",
+      "Shopify Apps",
+    ],
     faqs: [
       {
         question: "Why should I choose Shopify for my online store?",
@@ -213,7 +271,14 @@ const services = {
       "Explainer videos that simplify complex concepts",
       "Product demonstrations and promotional content",
     ],
-    technologies: ["Adobe Premiere Pro", "After Effects", "Cinema 4D", "Blender", "DaVinci Resolve", "Final Cut Pro"],
+    technologies: [
+      "Adobe Premiere Pro",
+      "After Effects",
+      "Cinema 4D",
+      "Blender",
+      "DaVinci Resolve",
+      "Final Cut Pro",
+    ],
     faqs: [
       {
         question: "What types of videos do you produce?",
@@ -232,15 +297,19 @@ const services = {
       },
     ],
   },
-}
+};
 
-export async function generateMetadata({ params }: { params: { service: string } }): Promise<Metadata> {
-  const service = services[params.service as keyof typeof services]
+export async function generateMetadata({
+  params,
+}: {
+  params: Params;
+}): Promise<Metadata> {
+  const service = services[params.service as keyof typeof services];
 
   if (!service) {
     return {
       title: "Service Not Found",
-    }
+    };
   }
 
   return {
@@ -268,37 +337,21 @@ export async function generateMetadata({ params }: { params: { service: string }
       description: service.description,
       images: [`https://insertech.io${service.imageSrc}`],
     },
-  }
+  };
 }
 
-export default function ServicePage({ params }: { params: { service: string } }) {
-  const serviceId = params.service
-  const service = services[serviceId as keyof typeof services]
+export function generateStaticParams(): Params[] {
+  return Object.keys(services).map((service) => ({ service }));
+}
+
+// Create a client component for the parts that need useSearchParams
+
+export default function ServicePage({ params }: { params: Params }) {
+  const serviceId = params.service;
+  const service = services[serviceId as keyof typeof services];
 
   if (!service) {
-    notFound()
-  }
-
-  // Get service icon based on service ID
-  const getServiceIcon = (id: string) => {
-    switch (id) {
-      case "web-development":
-        return <Globe className="h-4 w-4" />
-      case "mobile-development":
-        return <Smartphone className="h-4 w-4" />
-      case "custom-software":
-        return <Code className="h-4 w-4" />
-      case "erp-systems":
-        return <Database className="h-4 w-4" />
-      case "digital-marketing":
-        return <BarChart3 className="h-4 w-4" />
-      case "shopify":
-        return <ShoppingBag className="h-4 w-4" />
-      case "video-production":
-        return <Video className="h-4 w-4" />
-      default:
-        return <Globe className="h-4 w-4" />
-    }
+    notFound();
   }
 
   return (
@@ -307,14 +360,20 @@ export default function ServicePage({ params }: { params: { service: string } })
       <nav className="flex mb-6" aria-label="Breadcrumb">
         <ol className="inline-flex items-center space-x-1 md:space-x-3">
           <li className="inline-flex items-center">
-            <Link href="/" className="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600">
+            <Link
+              href="/"
+              className="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600"
+            >
               Home
             </Link>
           </li>
           <li>
             <div className="flex items-center">
               <ChevronRight className="w-4 h-4 text-gray-400" />
-              <Link href="/services" className="ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2">
+              <Link
+                href="/services"
+                className="ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2"
+              >
                 Services
               </Link>
             </div>
@@ -322,52 +381,33 @@ export default function ServicePage({ params }: { params: { service: string } })
           <li aria-current="page">
             <div className="flex items-center">
               <ChevronRight className="w-4 h-4 text-gray-400" />
-              <span className="ml-1 text-sm font-medium text-blue-600 md:ml-2">{service.title}</span>
+              <span className="ml-1 text-sm font-medium text-blue-600 md:ml-2">
+                {service.title}
+              </span>
             </div>
           </li>
         </ol>
       </nav>
 
-      {/* Service Navigation Bar */}
-      <div className="mb-10">
-        <div className="flex items-center justify-between mb-6">
-          <Link
-            href="/services"
-            className="flex items-center gap-2 text-blue-500 hover:text-blue-700 transition-colors"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            <span className="font-medium">All Services</span>
-          </Link>
-          <div className="text-sm text-gray-500">
-            Viewing <span className="font-medium text-blue-600">{service.title}</span>
-          </div>
-        </div>
-
-        {/* Services Carousel/Navigation */}
-        <div className="bg-gray-50 rounded-xl p-4 overflow-x-auto">
-          <div className="flex space-x-2 min-w-max">
-            {Object.entries(services).map(([serviceId, serviceInfo]) => (
-              <Link
-                key={serviceId}
-                href={`/services/${serviceId}`}
-                className={`px-4 py-2 rounded-lg flex items-center gap-2 whitespace-nowrap transition-colors ${
-                  serviceId === params.service
-                    ? "bg-blue-500 text-white"
-                    : "bg-white hover:bg-blue-50 text-gray-700 hover:text-blue-600"
-                }`}
-              >
-                {getServiceIcon(serviceId)}
-                <span className="text-sm font-medium">{serviceInfo.title.split(" ").slice(0, 2).join(" ")}</span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </div>
+      {/* Service Navigation Bar - Wrap in Suspense */}
+      <Suspense
+        fallback={
+          <div className="h-16 bg-gray-100 rounded-lg animate-pulse mb-10"></div>
+        }
+      >
+        <ServicePageClient
+          serviceId={serviceId}
+          service={service}
+          allServices={services}
+        />
+      </Suspense>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
         <div>
           <h1 className="text-4xl font-bold mb-4">{service.title}</h1>
-          <p className="text-xl text-gray-600 mb-8">{service.fullDescription}</p>
+          <p className="text-xl text-gray-600 mb-8">
+            {service.fullDescription}
+          </p>
 
           <h2 className="text-2xl font-bold mb-4">Key Features</h2>
           <ul className="space-y-3 mb-8">
@@ -382,7 +422,10 @@ export default function ServicePage({ params }: { params: { service: string } })
           <h2 className="text-2xl font-bold mb-4">Technologies</h2>
           <div className="flex flex-wrap gap-2 mb-8">
             {service.technologies.map((tech, index) => (
-              <span key={index} className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm">
+              <span
+                key={index}
+                className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm"
+              >
                 {tech}
               </span>
             ))}
@@ -396,7 +439,10 @@ export default function ServicePage({ params }: { params: { service: string } })
         <div className="relative rounded-xl overflow-hidden">
           <Image
             src={service.imageSrc || "/placeholder.svg"}
-            alt={`${service.title} - Professional ${serviceId.replace("-", " ")} services by Insertech in Qatar and Lebanon`}
+            alt={`${service.title} - Professional ${serviceId.replace(
+              "-",
+              " "
+            )} services by Insertech in Qatar and Lebanon`}
             width={800}
             height={600}
             className="object-cover"
@@ -408,7 +454,9 @@ export default function ServicePage({ params }: { params: { service: string } })
       {/* FAQ Section */}
       {service.faqs && (
         <div className="mt-16">
-          <h2 className="text-2xl font-bold mb-6">Frequently Asked Questions</h2>
+          <h2 className="text-2xl font-bold mb-6">
+            Frequently Asked Questions
+          </h2>
           <div className="space-y-6">
             {service.faqs.map((faq, index) => (
               <div key={index} className="bg-gray-50 rounded-lg p-6">
@@ -498,5 +546,5 @@ export default function ServicePage({ params }: { params: { service: string } })
         />
       )}
     </div>
-  )
+  );
 }

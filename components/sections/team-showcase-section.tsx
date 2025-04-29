@@ -1,22 +1,30 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState } from "react"
-import { motion } from "framer-motion"
-import { Code, Palette, Database, LineChart, Smartphone, Server, Cpu } from "lucide-react"
+import { useState } from "react";
+import { motion } from "framer-motion";
+import {
+  Code,
+  Palette,
+  Database,
+  LineChart,
+  Smartphone,
+  Server,
+  Cpu,
+} from "lucide-react";
 
 interface TeamMember {
-  id: string
-  name: string
-  position: string
-  specialty: string
-  icon: React.ReactNode
-  color: string
+  id: string;
+  name: string;
+  position: string;
+  specialty: string;
+  icon: React.ReactNode;
+  color: string;
 }
 
 export default function TeamShowcaseSection() {
-  const [hoveredMember, setHoveredMember] = useState<string | null>(null)
+  const [hoveredMember, setHoveredMember] = useState<string | null>(null);
 
   const seniorTeam: TeamMember[] = [
     {
@@ -83,7 +91,7 @@ export default function TeamShowcaseSection() {
       icon: <Cpu className="h-6 w-6" />,
       color: "bg-cyan-500",
     },
-  ]
+  ];
 
   const departmentCounts = {
     development: 12,
@@ -91,7 +99,7 @@ export default function TeamShowcaseSection() {
     projectManagement: 5,
     marketing: 6,
     customerSupport: 7,
-  }
+  };
 
   // Animation variants
   const containerVariants = {
@@ -102,7 +110,7 @@ export default function TeamShowcaseSection() {
         staggerChildren: 0.1,
       },
     },
-  }
+  };
 
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
@@ -115,7 +123,7 @@ export default function TeamShowcaseSection() {
         damping: 12,
       },
     },
-  }
+  };
 
   return (
     <section className="w-full py-20 bg-gray-50">
@@ -124,10 +132,12 @@ export default function TeamShowcaseSection() {
           <div className="inline-block px-4 py-1 bg-blue-100 text-blue-600 text-sm font-medium rounded-full mb-4">
             OUR TEAM
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Meet the Experts Behind Insertech</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            Meet the Experts Behind Insertech
+          </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Our team of seasoned professionals brings together diverse expertise to deliver exceptional digital
-            solutions
+            Our team of seasoned professionals brings together diverse expertise
+            to deliver exceptional digital solutions
           </p>
         </div>
 
@@ -168,15 +178,21 @@ export default function TeamShowcaseSection() {
                     <div
                       className={`w-40 h-32 rounded-t-full ${
                         member.color
-                      } mt-[-20px] transition-all duration-300 ${hoveredMember === member.id ? "scale-105" : ""}`}
+                      } mt-[-20px] transition-all duration-300 ${
+                        hoveredMember === member.id ? "scale-105" : ""
+                      }`}
                     ></div>
                   </div>
                 </div>
 
                 <div className="p-4 text-center">
                   <h3 className="font-bold text-lg">{member.name}</h3>
-                  <p className="text-gray-600 text-sm mb-1">{member.position}</p>
-                  <p className="text-blue-600 text-xs font-medium">{member.specialty}</p>
+                  <p className="text-gray-600 text-sm mb-1">
+                    {member.position}
+                  </p>
+                  <p className="text-blue-600 text-xs font-medium">
+                    {member.specialty}
+                  </p>
                 </div>
               </div>
             </motion.div>
@@ -185,9 +201,11 @@ export default function TeamShowcaseSection() {
 
         {/* Department Stats */}
         <div className="bg-white rounded-xl p-8 shadow-lg">
-          <h3 className="text-2xl font-bold mb-6 text-center">Our Extended Team</h3>
+          <h3 className="text-2xl font-bold mb-6 text-center">
+            Our Extended Team
+          </h3>
           <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
-            {Object.entries(departmentCounts).map(([dept, count], index) => (
+            {Object.entries(departmentCounts).map(([dept, count]) => (
               <div key={dept} className="text-center">
                 <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-100 text-blue-600 mb-3">
                   <span className="text-2xl font-bold">{count}</span>
@@ -196,12 +214,12 @@ export default function TeamShowcaseSection() {
                   {dept === "development"
                     ? "Development"
                     : dept === "design"
-                      ? "Design"
-                      : dept === "projectManagement"
-                        ? "Project Management"
-                        : dept === "marketing"
-                          ? "Marketing"
-                          : "Customer Support"}
+                    ? "Design"
+                    : dept === "projectManagement"
+                    ? "Project Management"
+                    : dept === "marketing"
+                    ? "Marketing"
+                    : "Customer Support"}
                 </h4>
               </div>
             ))}
@@ -209,5 +227,5 @@ export default function TeamShowcaseSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }

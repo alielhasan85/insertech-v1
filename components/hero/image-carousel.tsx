@@ -1,36 +1,43 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import Image from "next/image"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { useState, useEffect } from "react";
+import Image from "next/image";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface ImageCarouselProps {
   images: {
-    src: string
-    alt: string
-  }[]
-  autoplayInterval?: number
+    src: string;
+    alt: string;
+  }[];
+  autoplayInterval?: number;
 }
 
-export default function ImageCarousel({ images, autoplayInterval = 5000 }: ImageCarouselProps) {
-  const [currentIndex, setCurrentIndex] = useState(0)
-
-  const goToNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length)
-  }
+export default function ImageCarousel({
+  images,
+  autoplayInterval = 5000,
+}: ImageCarouselProps) {
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const goToPrevious = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length)
-  }
+    setCurrentIndex(
+      (prevIndex) => (prevIndex - 1 + images.length) % images.length
+    );
+  };
+
+  const goToNext = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+  };
 
   const goToSlide = (index: number) => {
-    setCurrentIndex(index)
-  }
+    setCurrentIndex(index);
+  };
 
   useEffect(() => {
-    const interval = setInterval(goToNext, autoplayInterval)
-    return () => clearInterval(interval)
-  }, [autoplayInterval])
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, autoplayInterval);
+    return () => clearInterval(interval);
+  }, [autoplayInterval, images.length]);
 
   return (
     <div className="relative w-full h-full">
@@ -44,7 +51,10 @@ export default function ImageCarousel({ images, autoplayInterval = 5000 }: Image
             }`}
           >
             <Image
-              src={image.src || "/placeholder.svg?height=800&width=1200&query=agency"}
+              src={
+                image.src ||
+                "/placeholder.svg?height=800&width=1200&query=agency"
+              }
               alt={image.alt || "Insertech digital agency showcase image"}
               fill
               className="object-cover"
@@ -58,7 +68,12 @@ export default function ImageCarousel({ images, autoplayInterval = 5000 }: Image
         {/* Pattern overlay */}
         <div className="absolute bottom-0 right-0 grid grid-cols-5 gap-2 p-4 z-10">
           {[...Array(15)].map((_, i) => (
-            <div key={i} className={`w-2 h-2 rounded-full ${i % 2 === 0 ? "bg-blue-500" : "bg-transparent"}`} />
+            <div
+              key={i}
+              className={`w-2 h-2 rounded-full ${
+                i % 2 === 0 ? "bg-blue-500" : "bg-transparent"
+              }`}
+            />
           ))}
         </div>
       </div>
@@ -93,5 +108,5 @@ export default function ImageCarousel({ images, autoplayInterval = 5000 }: Image
         ))}
       </div>
     </div>
-  )
+  );
 }

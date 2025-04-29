@@ -213,7 +213,7 @@ export default function AboutConnectSection() {
                 comprehensive digital agency serving clients across industries.
               </p>
               <p>
-                We've built our reputation on technical excellence, creative problem-solving, and an unwavering
+                We&apos;ve built our reputation on technical excellence, creative problem-solving, and an unwavering
                 commitment to client success. Our team combines diverse backgrounds and expertise to deliver innovative
                 solutions that drive measurable results.
               </p>
@@ -237,7 +237,7 @@ export default function AboutConnectSection() {
             <div className="space-y-4 text-lg text-gray-600">
               <p>
                 We believe that successful digital solutions start with a deep understanding of your business goals,
-                challenges, and users. Our collaborative approach ensures that we're not just building products, but
+                challenges, and users. Our collaborative approach ensures that we&apos;re not just building products, but
                 creating strategic assets that drive your business forward.
               </p>
               <p>
@@ -326,7 +326,7 @@ export default function AboutConnectSection() {
           <div className="relative z-10 p-12 text-center text-white">
             <h3 className="text-3xl font-bold mb-4">Ready to bring your ideas to life?</h3>
             <p className="text-xl text-blue-100 max-w-2xl mx-auto mb-8">
-              Let's collaborate to create digital solutions that drive your business forward. Our team is ready to turn
+              Let&apos;s collaborate to create digital solutions that drive your business forward. Our team is ready to turn
               your vision into reality.
             </p>
             <motion.div

@@ -28,7 +28,7 @@ export function MaliksLogo() {
       <div className="relative w-8 h-8 overflow-hidden">
         <Image src="/logos/maliks-bookstore-logo.png" alt="Malik's Bookstore" fill className="object-contain" />
       </div>
-      <span className="font-bold">Malik's</span>
+      <span className="font-bold">Malik&apos;s</span>
     </div>
   )
 }

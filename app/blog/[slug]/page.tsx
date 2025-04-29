@@ -187,10 +187,15 @@ const blogPosts = {
   },
 };
 
+type Params = {
+  slug: string;
+};
+
+// Use the correct type for generateMetadata
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Params;
 }): Promise<Metadata> {
   const post = blogPosts[params.slug as keyof typeof blogPosts];
 
@@ -233,11 +238,13 @@ export async function generateMetadata({
   };
 }
 
-export function generateStaticParams() {
+// Generate static paths
+export function generateStaticParams(): Params[] {
   return Object.keys(blogPosts).map((slug) => ({ slug }));
 }
 
-export default function BlogPostPage({ params }: { params: { slug: string } }) {
+// Use the correct type for the page component
+export default function BlogPostPage({ params }: { params: Params }) {
   const slug = params.slug;
   const post = blogPosts[slug as keyof typeof blogPosts];
 
@@ -303,7 +310,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
         <h1 className="text-3xl md:text-4xl font-bold mb-6">{post.title}</h1>
 
         <div className="flex items-center gap-3 mb-8">
-          {"avatar" in post.author && post.author.avatar ? (
+          {post.author.avatar ? (
             <Image
               src={post.author.avatar || "/placeholder.svg"}
               alt={`${post.author.name} - Insertech blog author`}

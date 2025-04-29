@@ -1,11 +1,11 @@
-"use client"
+"use client";
 
-import ServicesSection from "@/components/sections/services-section"
-import EnhancedTechnologiesSection from "@/components/sections/enhanced-technologies-section"
-import ServicesCTA from "@/components/sections/services-cta"
-import { useState, useEffect } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { Briefcase, Code, Smartphone, Database, BarChart3 } from "lucide-react"
+import ServicesSection from "@/components/sections/services-section";
+import EnhancedTechnologiesSection from "@/components/sections/enhanced-technologies-section";
+import ServicesCTA from "@/components/sections/services-cta";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Briefcase, Code, Smartphone, Database, BarChart3 } from "lucide-react";
 
 export default function ServicesPageClient() {
   // Technology data with improved logos and descriptions
@@ -19,7 +19,8 @@ export default function ServicesPageClient() {
     },
     {
       name: "React",
-      description: "JavaScript library for building user interfaces with reusable components and virtual DOM",
+      description:
+        "JavaScript library for building user interfaces with reusable components and virtual DOM",
       icon: "/technologies/react-logo.png",
       category: "Web Development",
     },
@@ -32,7 +33,8 @@ export default function ServicesPageClient() {
     },
     {
       name: "React Native",
-      description: "Framework for building native mobile apps using React and JavaScript with near-native performance",
+      description:
+        "Framework for building native mobile apps using React and JavaScript with near-native performance",
       icon: "/technologies/react-native-logo.png",
       category: "Mobile",
     },
@@ -45,19 +47,22 @@ export default function ServicesPageClient() {
     },
     {
       name: "TypeScript",
-      description: "Strongly typed programming language that builds on JavaScript with static type definitions",
+      description:
+        "Strongly typed programming language that builds on JavaScript with static type definitions",
       icon: "/technologies/typescript-logo.png",
       category: "Web Development",
     },
     {
       name: "Prisma",
-      description: "Next-generation ORM for Node.js and TypeScript with type-safety and auto-generated queries",
+      description:
+        "Next-generation ORM for Node.js and TypeScript with type-safety and auto-generated queries",
       icon: "/technologies/prisma-logo.png",
       category: "Backend",
     },
     {
       name: "Firebase",
-      description: "Google's platform for app development with authentication, databases, storage, and hosting",
+      description:
+        "Google's platform for app development with authentication, databases, storage, and hosting",
       icon: "/technologies/firebase-logo.png",
       category: "Backend",
     },
@@ -77,41 +82,47 @@ export default function ServicesPageClient() {
     },
     {
       name: "Shopify",
-      description: "Leading e-commerce platform for online stores with customizable themes and app marketplace",
+      description:
+        "Leading e-commerce platform for online stores with customizable themes and app marketplace",
       icon: "/technologies/shopify-logo.png",
       category: "Web Development",
     },
     {
       name: "Figma",
-      description: "Collaborative interface design tool for digital products with real-time collaboration features",
+      description:
+        "Collaborative interface design tool for digital products with real-time collaboration features",
       icon: "/technologies/figma-logo.png",
       category: "Design",
     },
     {
       name: "TailwindCSS",
-      description: "Utility-first CSS framework for rapidly building custom user interfaces with minimal CSS",
+      description:
+        "Utility-first CSS framework for rapidly building custom user interfaces with minimal CSS",
       icon: "/technologies/tailwind-logo.png",
       category: "Web Development",
     },
     {
       name: "PostgreSQL",
-      description: "Powerful, open source object-relational database system with strong reputation for reliability",
+      description:
+        "Powerful, open source object-relational database system with strong reputation for reliability",
       icon: "/technologies/postgresql-logo.png",
       category: "Backend",
     },
     {
       name: "MongoDB",
-      description: "Document-oriented NoSQL database used for high volume data storage with flexible schema",
+      description:
+        "Document-oriented NoSQL database used for high volume data storage with flexible schema",
       icon: "/technologies/mongodb-logo.png",
       category: "Backend",
     },
     {
       name: "AWS",
-      description: "Amazon's comprehensive cloud computing platform with over 200 fully featured services",
+      description:
+        "Amazon's comprehensive cloud computing platform with over 200 fully featured services",
       icon: "/technologies/aws-logo.png",
       category: "Backend",
     },
-  ]
+  ];
 
   const solutionCards = [
     {
@@ -138,18 +149,20 @@ export default function ServicesPageClient() {
       description: "Increase visibility and drive growth",
       color: "from-purple-500 to-pink-500",
     },
-  ]
+  ];
 
   function AnimatedSolutionCards({ solutionCards }) {
-    const [currentCardIndex, setCurrentCardIndex] = useState(0)
+    const [currentCardIndex, setCurrentCardIndex] = useState(0);
 
     useEffect(() => {
       const interval = setInterval(() => {
-        setCurrentCardIndex((prevIndex) => (prevIndex + 1) % solutionCards.length)
-      }, 3000) // Change card every 3 seconds
+        setCurrentCardIndex(
+          (prevIndex) => (prevIndex + 1) % solutionCards.length
+        );
+      }, 3000); // Change card every 3 seconds
 
-      return () => clearInterval(interval)
-    }, [solutionCards.length])
+      return () => clearInterval(interval);
+    }, [solutionCards.length]);
 
     return (
       <div className="absolute right-20 top-20 w-80 h-80 overflow-hidden">
@@ -166,8 +179,12 @@ export default function ServicesPageClient() {
               <div className="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center mb-4">
                 {solutionCards[currentCardIndex].icon}
               </div>
-              <h3 className="text-xl font-bold mb-2">{solutionCards[currentCardIndex].title}</h3>
-              <p className="text-blue-100/80 text-sm">{solutionCards[currentCardIndex].description}</p>
+              <h3 className="text-xl font-bold mb-2">
+                {solutionCards[currentCardIndex].title}
+              </h3>
+              <p className="text-blue-100/80 text-sm">
+                {solutionCards[currentCardIndex].description}
+              </p>
             </div>
             <div className="mt-6 grid grid-cols-3 gap-2">
               {[...Array(6)].map((_, i) => (
@@ -192,7 +209,7 @@ export default function ServicesPageClient() {
           ))}
         </div>
       </div>
-    )
+    );
   }
 
   return (
@@ -217,13 +234,24 @@ export default function ServicesPageClient() {
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-800/50 mb-6">
                 <Briefcase className="w-8 h-8" />
               </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">Our Services & Expertise</h1>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+                Our Services & Expertise
+              </h1>
               <p className="text-xl text-blue-100 max-w-xl mb-8">
-                Comprehensive digital solutions tailored to help your business thrive in today's competitive landscape
+                Comprehensive digital solutions tailored to help your business
+                thrive in today&apos;s competitive landscape
               </p>
               <div className="flex flex-wrap gap-4">
-                {["Web Development", "Mobile Apps", "ERP Systems", "Digital Media"].map((service, index) => (
-                  <div key={index} className="px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm font-medium">
+                {[
+                  "Web Development",
+                  "Mobile Apps",
+                  "ERP Systems",
+                  "Digital Media",
+                ].map((service, index) => (
+                  <div
+                    key={index}
+                    className="px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm font-medium"
+                  >
                     {service}
                   </div>
                 ))}
@@ -247,10 +275,13 @@ export default function ServicesPageClient() {
       <ServicesSection />
 
       {/* Technologies Section */}
-      <EnhancedTechnologiesSection technologies={technologies} darkMode={true} />
+      <EnhancedTechnologiesSection
+        technologies={technologies}
+        darkMode={true}
+      />
 
       {/* Call to Action Section */}
       <ServicesCTA />
     </>
-  )
+  );
 }

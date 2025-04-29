@@ -82,7 +82,7 @@ export default function ServicesCTA() {
 
           <div className="bg-blue-800 py-6 px-12">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 text-blue-100">
-              <div>Looking for a custom solution? We're here to help.</div>
+              <div>Looking for a custom solution? We&apos;re here to help.</div>
               <Link
                 href="/services#contact-form"
                 className="inline-flex items-center text-white font-medium hover:underline"
@@ -98,7 +98,7 @@ export default function ServicesCTA() {
         <div className="mt-24 text-center">
           <h3 className="text-2xl font-bold mb-2">What Our Clients Say</h3>
           <p className="text-gray-600 mb-12 max-w-2xl mx-auto">
-            Don't just take our word for it. See what our clients have to say
+            Don&apos;t just take our word for it. See what our clients have to say
             about working with us.
           </p>
 
