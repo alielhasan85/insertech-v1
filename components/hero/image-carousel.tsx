@@ -42,7 +42,7 @@ export default function ImageCarousel({
   return (
     <div className="relative w-full h-full">
       {/* Main image container with pattern overlay */}
-      <div className="relative overflow-hidden rounded-lg aspect-[4/3] w-full">
+      <div className="relative overflow-hidden rounded-lg shadow-sm aspect-[4/3] w-full">
         {images.map((image, index) => (
           <div
             key={index}

@@ -1,95 +1,70 @@
-import type React from "react";
+import TypeLoop from "@/components/hero/type-loop";
+import ImageCarousel from "@/components/hero/image-carousel";
+import FloatingShapesBackground from "@/components/hero/floating-shapes-background";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Download } from "lucide-react";
-import ImageCarousel from "@/components/hero/image-carousel";
-import FloatingShapesBackground from "./floating-shapes-background";
 
-interface HeroSectionProps {
-  title: string;
-  description: string;
-  primaryButtonText: string;
-  primaryButtonLink: string;
-  secondaryButtonText: string;
-  secondaryButtonLink: string;
-  images: Array<{
-    src: string;
-    alt: string;
-  }>;
-  trustedLogos?: Array<{
-    name: string;
-    logo: React.ReactNode;
-  }>;
-}
-
-export default function HeroSection({
-  title,
-  description,
-  primaryButtonText,
-  primaryButtonLink,
-  secondaryButtonText,
-  secondaryButtonLink,
-  images,
-  trustedLogos,
-}: HeroSectionProps) {
+export default function HeroSection() {
   return (
-    <section className="w-full py-12 md:py-24 relative">
-      {/* Subtle gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-white -z-10"></div>
+    <section className="W-full relative isolate overflow-hidden py-20">
+      {/* gradient + subtle shapes */}
+      <div className="absolute inset-0 -z-20 bg-gradient-to-br from-white via-blue-50 to-blue-100" />
+      <FloatingShapesBackground color="#3b82f6" count={25} speed={0.6} />
 
-      {/* Floating shapes background */}
-      <FloatingShapesBackground color="#3b82f6" count={40} speed={1.2} />
+      <div className="mx-auto grid max-w-[1400px] items-center gap-12 px-6 lg:grid-cols-2 lg:px-8">
+        {/* LEFT – copy */}
+        <div className="space-y-8">
+          <h1 className="text-4xl font-extrabold text- leading-tight sm:text-5xl">
+            Digital transformation
+            {/* typed list on its own line */}
+            <span className="block">
+              built&nbsp;for&nbsp;
+              <TypeLoop />
+            </span>
+          </h1>
 
-      <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
-          <div className="space-y-8">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-gray-900">
-              {title}
-            </h1>
-            <p className="text-lg text-gray-500 max-w-lg">{description}</p>
-            <div className="flex flex-wrap gap-3 sm:gap-4">
-              <Button asChild className="bg-blue-500 hover:bg-blue-600">
-                <Link href={primaryButtonLink}>{primaryButtonText}</Link>
-              </Button>
-              <Button
-                asChild
-                variant="outline"
-                className="flex items-center gap-2"
-              >
-                <Link href={secondaryButtonLink}>
-                  <Download className="h-4 w-4" />
-                  {secondaryButtonText}
-                </Link>
-              </Button>
-            </div>
+          <p className="max-w-md text-lg text-gray-600">
+            Insertech turns raw ideas into shipped products—fast. Our lean,
+            cross-functional squads design, build and launch software that
+            levels up your startup.
+          </p>
 
-            {trustedLogos && (
-              <div className="pt-8 border-t">
-                <p className="text-sm text-gray-500 mb-4">
-                  Trusted by leading brands
-                </p>
-                <div className="flex flex-wrap gap-8 items-center">
-                  {trustedLogos.map((logo, index) => (
-                    <div
-                      key={index}
-                      className="opacity-80 hover:opacity-100 transition-opacity"
-                    >
-                      {logo.logo}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
+          <div className="flex flex-wrap gap-4">
+            <Button asChild size="lg">
+              <Link href="/services">See what we build</Link>
+            </Button>
+            <Button asChild variant="outline" size="lg">
+              <Link href="/contact?service=consultation">
+                Get a free roadmap
+              </Link>
+            </Button>
           </div>
+        </div>
 
-          <div className="relative">
-            <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-blue-100 rounded-lg z-0 hidden md:block" />
-            <ImageCarousel images={images} />
-            <div className="absolute -z-10 bottom-12 right-12 grid grid-cols-3 gap-2">
-              {[...Array(9)].map((_, i) => (
-                <div key={i} className="w-2 h-2 rounded-full bg-blue-500" />
-              ))}
-            </div>
+        {/* RIGHT – visual */}
+        <div className="relative">
+          {/* decorative blob */}
+          <div className="absolute -bottom-6 -right-6 hidden h-24 w-24 rounded-lg bg-blue-100 lg:block" />
+          <ImageCarousel
+            images={[
+              {
+                src: "/agency-image-1.png",
+                alt: "Insertech professional team working on digital solutions for Middle East businesses",
+              },
+              {
+                src: "/agency-image-2.png",
+                alt: "Insertech team meeting in modern office discussing software development strategy",
+              },
+              {
+                src: "/agency-image-3.png",
+                alt: "Insertech modern workspace with developers creating custom software solutions",
+              },
+            ]}
+          />
+          <div className="absolute -z-10 bottom-12 right-12 grid grid-cols-3 gap-2">
+            {[...Array(9)].map((_, i) => (
+              <div key={i} className="w-2 h-2 rounded-full bg-blue-500" />
+            ))}
           </div>
         </div>
       </div>

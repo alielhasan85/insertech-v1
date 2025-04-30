@@ -119,4 +119,28 @@
   body {
     @apply bg-background text-foreground;
   }
+  /* app/globals.css */
+  @layer utilities {
+    .animate-shimmer {
+      background-size: 200% 200%; /* 200% matches the old inline style  */
+      animation: shimmer 18s linear infinite;
+    }
+
+    .bg-grid-dot {
+      background-image: radial-gradient(
+        rgba(255, 255, 255, 0.06) 1px,
+        transparent 1px
+      );
+      background-size: 32px 32px; /* slightly tighter dot grid         */
+    }
+
+    @keyframes shimmer {
+      0% {
+        background-position: 0% 50%;
+      }
+      100% {
+        background-position: 100% 50%;
+      }
+    }
+  }
 }

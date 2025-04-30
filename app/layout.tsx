@@ -5,7 +5,6 @@ import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
-import { LoadingIndicator } from "@/components/ui/loading-indicator";
 import { RouterEvents } from "@/app/router-events";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -87,7 +86,6 @@ export default function RootLayout({
         <link rel="preload" href="/agency-image-1.png" as="image" />
       </head>
       <body className={inter.className}>
-        <LoadingIndicator />
         <ThemeProvider attribute="class" defaultTheme="light">
           <RouterEvents />
           <Navbar />
