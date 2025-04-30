@@ -344,8 +344,6 @@ export function generateStaticParams(): Params[] {
   return Object.keys(services).map((service) => ({ service }));
 }
 
-// Create a client component for the parts that need useSearchParams
-
 export default function ServicePage({ params }: { params: Params }) {
   const serviceId = params.service;
   const service = services[serviceId as keyof typeof services];

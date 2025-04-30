@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 
 export function RouterEvents() {
   const pathname = usePathname();
-  // const searchParams = useSearchParams()
 
   useEffect(() => {
     // Prefetch common routes that users might navigate to

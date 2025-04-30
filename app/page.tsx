@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
+// import Link from "next/link";
+// import { Button } from "@/components/ui/button";
 import HeroSection from "@/components/hero/hero-section";
 import CompactServicesSection from "@/components/sections/compact-services-section";
 import HomeAboutSection from "@/components/sections/home-about-section";
 import BlogPreview from "@/components/previews/blog-preview";
 import ContactCTA from "@/components/sections/contact-cta";
-import GradientCard from "@/components/sections/contact-cta";
+// import GradientCard from "@/components/sections/contact-cta";
+import { Suspense } from "react";
 // import {
 //   OgeroLogo,
 //   CarrefourLogo,
@@ -61,7 +62,9 @@ export default function Home() {
       />
 
       {/* Compact Services Section */}
-      <CompactServicesSection />
+      <Suspense fallback={null}>
+        <CompactServicesSection />
+      </Suspense>
 
       {/* Combined About & Technologies Section */}
       <HomeAboutSection />

@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-// import { useSearchParams } from "next/navigation";
 import {
   ArrowLeft,
   Globe,
@@ -40,8 +39,6 @@ export default function ServicePageClient({
   service,
   allServices,
 }: ServicePageClientProps) {
-  // Now we can safely use useSearchParams() in this client component
-
   // Get service icon based on service ID
   const getServiceIcon = (id: string) => {
     switch (id) {
